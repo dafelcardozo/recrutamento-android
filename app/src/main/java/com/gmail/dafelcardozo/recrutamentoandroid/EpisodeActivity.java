@@ -1,9 +1,11 @@
 package com.gmail.dafelcardozo.recrutamentoandroid;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,11 +42,13 @@ public class EpisodeActivity extends AppCompatActivity
         getSupportActionBar().hide();
 
 
+        LayoutInflater inflater= (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.listView);
 
-        // Defined Array values to show in ListView
+        View vi= inflater.inflate(R.layout.episode_item, null);
+
         String[] values = new String[] {
                 "Winter is coming",
                 "The Kingsroad",
@@ -64,34 +68,35 @@ public class EpisodeActivity extends AppCompatActivity
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+                R.layout.episode_item, R.id.episode_title, values);
 
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
 
         // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition     = position;
-
-                // ListView Clicked item value
-                String  itemValue    = (String) listView.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
-
-            }
-
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                // ListView Clicked item index
+//                int itemPosition     = position;
+//
+//                // ListView Clicked item value
+//                String  itemValue    = (String) listView.getItemAtPosition(position);
+//
+//                // Show Alert
+//                Toast.makeText(getApplicationContext(),
+//                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+//                        .show();
+//
+//            }
+//
+//        });
 
 
 
