@@ -135,7 +135,7 @@ public class EpisodeActivity extends AppCompatActivity
 
             TextView episodeNumber = (TextView) convertView.findViewById(R.id.episode_number);
             TextView episodeTitle = (TextView) convertView.findViewById(R.id.episode_title);
-            episodeNumber.setText("Ep:"+ (position+1));
+            episodeNumber.setText("E"+ (position+1));
             episodeTitle.setText(getItem(position));
             return convertView;
         }
