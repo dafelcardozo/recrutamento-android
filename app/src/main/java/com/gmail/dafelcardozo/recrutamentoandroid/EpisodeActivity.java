@@ -15,14 +15,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EpisodeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private static final List<String> values = Arrays.asList(
+            "Winter is coming",
+            "The Kingsroad",
+            "Lord Snow",
+            "Cripples, Bastards, and Broken Things",
+            "The Wolf and the Lion",
+            "A Golden  Crown",
+            "You Win or you Die",
+            "The Point End",
+            "Baelor",
+            "Fire and Blood"
+    );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,68 +55,13 @@ public class EpisodeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         getSupportActionBar().hide();
 
-
         LayoutInflater inflater= (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        // Get ListView object from xml
         listView = (ListView) findViewById(R.id.listView);
 
         View vi= inflater.inflate(R.layout.episode_item, null);
-
-        String[] values = new String[] {
-                "Winter is coming",
-                "The Kingsroad",
-                "Lord Snow",
-                "Cripples, Bastards, and Broken Things",
-                "The Wolf and the Lion",
-                "A Golden  Crown",
-                "You Win or you Die",
-                "The Point End",
-                "Baelor",
-                "Fire and Blood"
-        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.episode_item, R.id.episode_title, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-//                // ListView Clicked item index
-//                int itemPosition     = position;
-//
-//                // ListView Clicked item value
-//                String  itemValue    = (String) listView.getItemAtPosition(position);
-//
-//                // Show Alert
-//                Toast.makeText(getApplicationContext(),
-//                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-//                        .show();
-//
-//            }
-//
-//        });
-
-
-
+        listView.setAdapter(new EpisodesAdapter(this, values));
     }
 
     @Override
@@ -114,7 +76,6 @@ public class EpisodeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.episode, menu);
         return true;
     }
@@ -161,4 +122,22 @@ public class EpisodeActivity extends AppCompatActivity
     ListView listView ;
 
 
+    public class EpisodesAdapter extends ArrayAdapter<String> {
+        public EpisodesAdapter(Context context, List<String> users) {
+            super(context, 0, users);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null)
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.episode_item, parent, false);
+
+            TextView episodeNumber = (TextView) convertView.findViewById(R.id.episode_number);
+            TextView episodeTitle = (TextView) convertView.findViewById(R.id.episode_title);
+            episodeNumber.setText("Ep:"+ (position+1));
+            episodeTitle.setText(getItem(position));
+            return convertView;
+        }
+    }
 }
