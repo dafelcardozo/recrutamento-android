@@ -45,14 +45,17 @@ public class EpisodeActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listView);
 
         // Defined Array values to show in ListView
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
+        String[] values = new String[] { 
+                "Winter is coming",
+                "The Kingsroad",
+                "Lord Snow",
+                "Cripples, Bastards, and Broken Things",
+                "The Wolf and the Lion",
+                "A Golden  Crown",
+                "You Win or you Die",
+                "The Point End",
+                "Baelor",
+                "Fire and Blood"
         };
 
         // Define a new Adapter
