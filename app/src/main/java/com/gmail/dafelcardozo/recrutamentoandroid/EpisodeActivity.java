@@ -45,7 +45,7 @@ public class EpisodeActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listView);
 
         // Defined Array values to show in ListView
-        String[] values = new String[] { 
+        String[] values = new String[] {
                 "Winter is coming",
                 "The Kingsroad",
                 "Lord Snow",
